@@ -1,16 +1,22 @@
 package org.afrinnov.rnd.hex;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import org.afrinnov.rnd.hex.dto.UserIdentity;
+import org.afrinnov.rnd.hex.port.ReadAccessCode;
+import org.afrinnov.rnd.hex.ui.AccessCodeUI;
+
+import javax.inject.Inject;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/hello-resteasy")
+@Path("/generator")
 public class GreetingResource {
+    @Inject
+    private ReadAccessCode readAccessCode;
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "Hello RESTEasy";
+
+    @Produces(MediaType.APPLICATION_JSON)
+    public AccessCodeUI generator(@QueryParam("email") String email) {
+        return new AccessCodeUI(readAccessCode.generate(new UserIdentity(email)));
     }
 }
