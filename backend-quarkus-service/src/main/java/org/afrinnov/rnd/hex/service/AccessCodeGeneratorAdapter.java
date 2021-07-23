@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 @ApplicationScoped
 public class AccessCodeGeneratorAdapter implements AccessCodeGenerator {
+
     @Override
     public AccessCodeDto create(UserIdentity userIdentity) {
         String code = generate() + "-" + generate();

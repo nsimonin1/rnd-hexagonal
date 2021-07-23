@@ -14,7 +14,6 @@ public class GreetingResource {
     private ReadAccessCode readAccessCode;
 
     @GET
-
     @Produces(MediaType.APPLICATION_JSON)
     public AccessCodeUI generator(@QueryParam("email") String email) {
         return new AccessCodeUI(readAccessCode.generate(new UserIdentity(email)));
